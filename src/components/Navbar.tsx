@@ -1,6 +1,12 @@
+import { CgShoppingCart } from "react-icons/cg";
 import { Link, NavLink } from "react-router-dom";
+import { useAppSelector } from "../hooks/storeHooks";
 
 const Navbar = () => {
+  const cartItem = useAppSelector((state) => state.cart.item);
+
+  const totalCount = cartItem?.reduce((sum, { quantity }) => sum + quantity, 0);
+
   const links = (
     <>
       <li>
@@ -21,16 +27,6 @@ const Navbar = () => {
           }
         >
           Products
-        </NavLink>
-      </li>{" "}
-      <li>
-        <NavLink
-          to={"/cart"}
-          className={({ isActive }) =>
-            isActive ? "bg-cyan-400 font-semibold " : ""
-          }
-        >
-          Cart
         </NavLink>
       </li>{" "}
       <li>
@@ -92,6 +88,18 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
+        <NavLink to={"/cart"} className="relative inline-block p-2 mr-6">
+          <div className="indicator">
+            <CgShoppingCart size={24} />
+            <span className="relative bg-green-400 rounded-full text-xs  text-black ">
+              {totalCount > 0 && (
+                <span className="badge badge-sm indicator-item bg-blue-700 font-bold">
+                  {totalCount}
+                </span>
+              )}
+            </span>
+          </div>
+        </NavLink>
         <a className="btn bg-blue-600">Login</a>
       </div>
     </div>

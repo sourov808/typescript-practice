@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import type { Product } from "../../types";
 import { BsStarFill } from "react-icons/bs";
 import AddCart from "../AddCart/AddCart";
-
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 interface ProductCardProsp {
   product: Product;
 }
@@ -23,7 +24,22 @@ const ProductCard = ({ product }: ProductCardProsp) => {
     <div className="flex justify-center">
       <div className="card bg-base-100 max-w-11/12   border shadow-sm hover:scale-105 ">
         <figure className="px-10 pt-10 bg-gray-50 m-2">
-          <img src={thumbnail} alt="Shoes" className="rounded-xl bg-gray-100" />
+          <LazyLoadImage
+            src={thumbnail}
+            alt={title}
+            width={400}
+            height={300}
+            effect="blur"
+            threshold={100}
+            placeholderSrc={`${thumbnail}?blur=20&auto=format&fit=clip`}
+            wrapperProps={{
+              className: "w-full h-full",
+              style: { transitionDelay: "1s" },
+            }}
+            // beforeLoad={() => console.debug(`Loading thumbnail for ${id}`)}
+            // onLoad={() => console.debug(`Loaded thumbnail for ${id}`)}
+          ></LazyLoadImage>
+          {/* <img src={thumbnail} alt="Shoes" className="rounded-xl bg-gray-100" /> */}
         </figure>
         <div className=" flex justify-between px-4 ">
           {brand ? (

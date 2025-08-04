@@ -1,18 +1,19 @@
-import type { Product } from "../../types";
 import { BsStarFill } from "react-icons/bs";
 
-interface ReviewProps {
-  reviews: Product;
+interface Review {
+  rating: number;
+  comment: string;
+  reviewerEmail: string;
+  reviewerName: string;
 }
-
-const Review = ({ reviews }: ReviewProps) => {
+const Review = ({ reviews }: Review) => {
   console.log(reviews);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 space-x-1 space-y-3  ">
-      {reviews.map((_, r) => (
+      {reviews.map((r, idx) => (
         <div
           className="border flex flex-col space-y-1  space-x-1.5 p-3 rounded-xl shadow-lg shadow-blue-300"
-          key={Math.random()}
+          key={idx}
         >
           <span className="flex items-center gap-1 badge badge-success rounded-xl text-white font-bold ">
             <span>{r.rating}/5</span> <BsStarFill size={9} />

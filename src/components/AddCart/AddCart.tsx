@@ -25,7 +25,11 @@ const AddCart = ({ id, product }: CartProps) => {
 
   const handleAddToCart = () => {
     dispatch(addToCart({ product, quantity: 1 }));
-    Toast({ img: product.thumbnail, title: `${product.title} added to cart` });
+    Toast({
+      img: product.thumbnail,
+      title: `${product.title}`,
+      titleDes: `${"added to cart"}`,
+    });
   };
 
   if (!cartItem) {

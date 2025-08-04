@@ -15,16 +15,16 @@ export interface Product {
   warrantyInformation?: string;
   weight?: string;
   shippingInformation?: string;
-  reviews: Review[];
+  reviews?: Review[];
   stock: number;
 }
 
 export interface Review {
-  rating: number;
-  comment: string;
-  date: string;
-  reviewerName: string;
-  reviewerEmail: string;
+  rating?: number;
+  comment?: string;
+  date?: string;
+  reviewerName?: string;
+  reviewerEmail?: string;
 }
 
 export interface ProductState {
@@ -32,4 +32,7 @@ export interface ProductState {
   selectedProduct: Product | null;
   loading: boolean;
   error: string | null;
+  currentPage: number;
+  totalPages: number;
+  limit: number;
 }
